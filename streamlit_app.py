@@ -273,6 +273,24 @@ def apply_theme() -> None:
             border-radius: 13px !important;
             border-color: var(--line) !important;
             background: white !important;
+            color: var(--text) !important;
+            -webkit-text-fill-color: var(--text) !important;
+            opacity: 1 !important;
+            caret-color: var(--text) !important;
+          }
+
+          div[data-testid="stDateInput"] input::placeholder,
+          div[data-testid="stTimeInput"] input::placeholder {
+            color: #9a9aa0 !important;
+            -webkit-text-fill-color: #9a9aa0 !important;
+            opacity: 1 !important;
+          }
+
+          div[data-baseweb="select"] span,
+          div[data-baseweb="select"] input {
+            color: var(--text) !important;
+            -webkit-text-fill-color: var(--text) !important;
+            opacity: 1 !important;
           }
 
           .stButton > button,
@@ -457,7 +475,6 @@ def render_header() -> None:
               </p>
             </div>
             <div class="run-stack">
-              <div class="run-pill">▶ Run Update</div>
               <span class="engine-note">Moteur Python reel - sorties REVIEW / P6_IMPORT / LOG</span>
             </div>
           </div>
@@ -474,9 +491,9 @@ def render_metric_cards(summary: dict[str, Any] | None = None) -> None:
     files = 3 if summary else 0
 
     cards = [
-        ("↗ APPLIQUEES", applied, "Lignes calculees"),
-        ("⚠ CONFLITS", conflicts, "Incoherences"),
-        ("▣ FICHIERS", files, "Livrables"),
+        ("APPLIQUEES", applied, "Lignes calculees"),
+        ("CONFLITS", conflicts, "Incoherences"),
+        ("FICHIERS", files, "Livrables"),
     ]
 
     cols = st.columns(3)
@@ -501,14 +518,14 @@ def render_empty_state() -> None:
         """
         <div class="results-card">
           <div class="empty-state">
-            <div class="empty-icon">▰</div>
+            <div class="empty-icon">P6</div>
             <h3 class="empty-title">Aucune mise a jour executee</h3>
             <p class="empty-copy">
               Utilisez le panneau de gauche pour configurer vos classeurs sources, puis cliquez sur
               <strong>Run Update</strong> pour lancer la reconciliation Primavera P6.
             </p>
             <div class="guide-card">
-              <strong>ⓘ Guide de traitement</strong>
+              <strong>Guide de traitement</strong>
               <ul>
                 <li><strong>Calcul comparatif:</strong> compare les avancements externes et l'etat Primavera.</li>
                 <li><strong>Resolution des conflits:</strong> isole les incoherences de dates ou de pourcentages.</li>
@@ -584,6 +601,10 @@ if "last_tmp" not in st.session_state:
 
 default_start, default_finish = this_week_bounds()
 
+action_spacer, action_col = st.columns([0.78, 0.22], gap="large")
+with action_col:
+    run = st.button("Run Update", type="primary", use_container_width=True, key="run_update_top")
+
 left, right = st.columns([0.42, 0.58], gap="large")
 
 with left:
@@ -628,7 +649,6 @@ with left:
         start_time = st.time_input("Heure debut", value=default_start.time())
         finish_time = st.time_input("Heure fin", value=default_finish.time())
 
-    run = st.button("▶ Run Update", type="primary", use_container_width=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 start_dt = datetime.combine(start_date, start_time)
