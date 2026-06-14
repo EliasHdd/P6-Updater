@@ -63,6 +63,7 @@ def apply_theme() -> None:
         """
         <style>
           @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,400,0,0');
 
           :root {
             --app-bg: #f9f9fb;
@@ -93,6 +94,8 @@ def apply_theme() -> None:
             max-width: 1280px;
             padding-top: 2.5rem;
             padding-bottom: 4rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
           }
 
           h1, h2, h3, p {
@@ -115,7 +118,7 @@ def apply_theme() -> None:
             border-radius: 24px;
             padding: 20px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.01);
-            margin-bottom: 1rem;
+            margin-bottom: 2.5rem;
           }
 
           .hero-grid {
@@ -157,9 +160,9 @@ def apply_theme() -> None:
           .hero-title {
             margin: 0 0 6px;
             color: var(--text);
-            font-size: 20px;
+            font-size: 20px !important;
             line-height: 1.12;
-            font-weight: 600;
+            font-weight: 600 !important;
             letter-spacing: -0.02em;
           }
 
@@ -167,8 +170,47 @@ def apply_theme() -> None:
             max-width: 580px;
             margin: 0;
             color: var(--muted);
-            font-size: 12px;
+            font-size: 12px !important;
             line-height: 1.55;
+          }
+
+          .header-action-note {
+            margin-bottom: 10px;
+            color: var(--muted);
+            font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+            font-size: 10px;
+            letter-spacing: 0.04em;
+            text-align: right;
+          }
+
+          .run-button-visual {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 170px;
+            height: 38px;
+            border-radius: 999px;
+            background: #000;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+          }
+
+          div[data-testid="stElementContainer"]:has(.stButton > button[kind="primary"]) {
+            position: absolute;
+            top: 147px;
+            right: max(20px, calc((100vw - 1216px) / 2 + 20px));
+            width: 170px;
+            height: 38px;
+            z-index: 1000;
+            margin: 0;
+          }
+
+          div[data-testid="stElementContainer"]:has(.stButton > button[kind="primary"]) .stButton,
+          div[data-testid="stElementContainer"]:has(.stButton > button[kind="primary"]) button {
+            width: 170px !important;
+            height: 38px !important;
           }
 
           .run-stack {
@@ -204,6 +246,17 @@ def apply_theme() -> None:
             margin-bottom: 1.5rem;
           }
 
+          div[data-testid="stVerticalBlockBorderWrapper"] {
+            border: 1px solid var(--line) !important;
+            border-radius: 24px !important;
+            background: white !important;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.01) !important;
+          }
+
+          div[data-testid="stVerticalBlockBorderWrapper"] > div {
+            padding: 24px !important;
+          }
+
           .section-title {
             margin: 0 0 10px;
             color: var(--text);
@@ -230,12 +283,12 @@ def apply_theme() -> None:
             display: flex;
             align-items: center;
             gap: 10px;
-            margin: 22px 0 8px;
+            margin: 24px 0 8px;
             color: var(--text);
             font-size: 12px;
-            font-weight: 800;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.035em;
+            letter-spacing: 0.045em;
           }
 
           .field-badge {
@@ -260,13 +313,19 @@ def apply_theme() -> None:
             border: 1px dashed var(--line);
             border-radius: 16px;
             background: white;
-            padding: 10px;
-            margin-bottom: 1.25rem;
+            padding: 0;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: border-color 180ms ease, background 180ms ease;
           }
 
           div[data-testid="stFileUploader"] section {
             border: 0;
-            padding: 12px 8px;
+            padding: 16px;
+            min-height: 96px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
           }
 
           div[data-testid="stFileUploader"] button {
@@ -274,8 +333,10 @@ def apply_theme() -> None:
             border: 1px solid var(--line) !important;
             background: white !important;
             color: var(--text) !important;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            font-size: 12px !important;
+            font-weight: 600;
+            padding: 8px 16px !important;
           }
 
           div[data-testid="stFileUploader"] small {
@@ -288,17 +349,39 @@ def apply_theme() -> None:
             background: white !important;
           }
 
+          div[data-testid="stFileUploaderDropzone"] > div:first-child {
+            width: 42px !important;
+            height: 42px !important;
+            border-radius: 12px !important;
+            border: 1px solid var(--line) !important;
+            background: var(--app-bg) !important;
+            color: #a1a1a6 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+
+          div[data-testid="stFileUploaderDropzoneInstructions"] span,
+          div[data-testid="stFileUploaderDropzoneInstructions"] div {
+            color: #5f6066 !important;
+            font-size: 12px !important;
+          }
+
           div[data-testid="stDateInput"] input,
           div[data-testid="stTimeInput"] input,
           div[data-testid="stTextInput"] input,
           div[data-baseweb="select"] > div {
-            border-radius: 13px !important;
+            min-height: 46px !important;
+            border-radius: 12px !important;
             border-color: var(--line) !important;
             background: white !important;
             color: var(--text) !important;
             -webkit-text-fill-color: var(--text) !important;
             opacity: 1 !important;
             caret-color: var(--text) !important;
+            font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
           }
 
           div[data-testid="stDateInput"] input::placeholder,
@@ -320,7 +403,8 @@ def apply_theme() -> None:
           .stDownloadButton > button {
             border-radius: 999px;
             min-height: 38px;
-            font-weight: 800;
+            font-size: 12px;
+            font-weight: 600;
             border: 1px solid var(--line);
             background: white;
             color: var(--text);
@@ -339,6 +423,9 @@ def apply_theme() -> None:
             border-color: #000;
             background: #000;
             color: white;
+            min-height: 38px;
+            padding-left: 24px;
+            padding-right: 24px;
           }
 
           .stButton > button[kind="primary"]:hover,
@@ -363,9 +450,19 @@ def apply_theme() -> None:
           .metric-label {
             color: var(--muted);
             font-size: 10px;
-            font-weight: 800;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.06em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          }
+
+          .metric-symbol {
+            font-family: "Material Symbols Rounded";
+            font-size: 15px;
+            color: #000;
+            line-height: 1;
           }
 
           .metric-value {
@@ -477,6 +574,17 @@ def apply_theme() -> None:
             text-transform: uppercase;
           }
 
+          .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-right: 7px;
+            border-radius: 999px;
+            background: #10b981;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12);
+            vertical-align: middle;
+          }
+
           .mini-progress-track {
             height: 8px;
             width: 100%;
@@ -518,6 +626,94 @@ def apply_theme() -> None:
             overflow-wrap: anywhere;
           }
 
+          .file-card {
+            min-height: 154px;
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            background: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 14px;
+          }
+
+          .file-card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+          }
+
+          .file-card-icon,
+          .workbook-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            background: var(--soft);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-family: "Material Symbols Rounded";
+            font-size: 22px;
+          }
+
+          .file-card-tag {
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            background: var(--soft);
+            padding: 2px 7px;
+            color: var(--text);
+            font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+          }
+
+          .file-card-name {
+            color: var(--text);
+            font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+            font-size: 12px;
+            font-weight: 700;
+            overflow-wrap: anywhere;
+          }
+
+          .file-card-meta {
+            color: var(--muted);
+            font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+            font-size: 10px;
+          }
+
+          button[data-baseweb="tab"] {
+            border-radius: 999px !important;
+            padding: 7px 16px !important;
+            color: var(--muted) !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+          }
+
+          button[data-baseweb="tab"][aria-selected="true"] {
+            background: #000 !important;
+            color: white !important;
+          }
+
+          div[data-baseweb="tab-list"] {
+            width: max-content;
+            gap: 2px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: var(--soft);
+            padding: 4px;
+          }
+
+          label[data-testid="stWidgetLabel"] p {
+            color: var(--text) !important;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+          }
+
           div[data-testid="stDataFrame"] {
             border: 1px solid var(--line);
             border-radius: 16px;
@@ -552,7 +748,7 @@ def apply_theme() -> None:
     )
 
 
-def render_header() -> None:
+def render_header() -> bool:
     st.markdown(
         """
         <div class="top-line"></div>
@@ -560,23 +756,23 @@ def render_header() -> None:
           <div class="hero-grid">
             <div>
               <div class="badge-row">
-                <span class="mode-badge">Mode securise actif</span>
-                <span class="version-label">v5.0 Web UI</span>
+                <span class="mode-badge">MODE SECURISE ACTIF</span>
+                <span class="version-label">v4.2.0 Stable</span>
               </div>
               <h1 class="hero-title">P6 Weekly Progress Updater</h1>
               <p class="hero-copy">
-                Reconciliation et consolidation des avancements physiques externes avec Primavera P6.
-                Regle active : le pourcentage le plus haut gagne, et le master est conserve s'il est deja au-dessus.
+                Consolidation des avancements physiques chantiers (SPIE, GCC) avec Primavera P6.
               </p>
             </div>
             <div class="run-stack">
-              <span class="engine-note">Moteur Python reel - sorties REVIEW / P6_IMPORT / LOG</span>
+              <span class="header-action-note">Source protegee</span>
             </div>
           </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
+    return st.button("Run Update", type="primary", key="run_update_top")
 
 
 def render_metric_cards(summary: dict[str, Any] | None = None) -> None:
@@ -586,19 +782,19 @@ def render_metric_cards(summary: dict[str, Any] | None = None) -> None:
     files = 3 if summary else 0
 
     cards = [
-        ("APPLIQUEES", applied, "Lignes calculees"),
-        ("CONFLITS", conflicts, "Incoherences"),
-        ("FICHIERS", files, "Livrables"),
+        ("trending_up", "APPLIQUEES", applied, "Lignes calculees"),
+        ("warning", "CONFLITS", conflicts, "Incoherences"),
+        ("folder_check", "FICHIERS", files, "Livrables"),
     ]
 
     cols = st.columns(3)
-    for col, (label, value, chip) in zip(cols, cards):
+    for col, (icon, label, value, chip) in zip(cols, cards):
         with col:
             st.markdown(
                 f"""
                 <div class="metric-card">
                   <div>
-                    <div class="metric-label">{label}</div>
+                    <div class="metric-label"><span class="metric-symbol">{icon}</span>{label}</div>
                     <div class="metric-value">{value}</div>
                   </div>
                   <div class="metric-chip">{chip}</div>
@@ -615,7 +811,7 @@ def render_empty_state() -> None:
           <div class="empty-state">
             <div class="empty-icon">
               <div class="mini-progress-row">
-                <span>MOTEUR PRET</span>
+                <span><span class="status-dot"></span>MOTEUR PRET</span>
                 <span>Attente d'execution (0%)</span>
               </div>
               <div class="mini-progress-track">
@@ -670,56 +866,55 @@ def render_file_field(label: str, badge: str, help_text: str, key: str):
 
 
 def render_week_destination_card() -> None:
-    st.markdown(
-        """
-        <div class="section-card">
-          <p class="section-title">Week & Destination</p>
-          <p class="section-copy">
-            Definissez la fenetre de date et gardez les rapports de revue, fichiers d'importation Primavera
-            et logs disponibles en telechargement apres execution.
-          </p>
-        """,
-        unsafe_allow_html=True,
-    )
-    date_cols = st.columns(2)
-    with date_cols[0]:
-        st.text_input(
-            "Date & Heure Debut",
-            key="start_text",
-            placeholder="JJ/MM/AAAA HH:MM",
+    with st.container(border=True):
+        st.markdown(
+            """
+            <p class="section-title">Week & Destination</p>
+            <p class="section-copy">
+              Definissez la fenetre de date et gardez les rapports de revue, fichiers d'importation Primavera
+              et logs disponibles en telechargement apres execution.
+            </p>
+            """,
+            unsafe_allow_html=True,
         )
-    with date_cols[1]:
-        st.text_input(
-            "Date & Heure Fin",
-            key="finish_text",
-            placeholder="JJ/MM/AAAA HH:MM",
-        )
+        date_cols = st.columns(2)
+        with date_cols[0]:
+            st.text_input(
+                "Date & Heure Debut",
+                key="start_text",
+                placeholder="JJ/MM/AAAA HH:MM",
+            )
+        with date_cols[1]:
+            st.text_input(
+                "Date & Heure Fin",
+                key="finish_text",
+                placeholder="JJ/MM/AAAA HH:MM",
+            )
 
-    preset_cols = st.columns([0.25, 0.25, 0.25, 0.25])
-    with preset_cols[0]:
-        st.caption("Raccourcis")
-    with preset_cols[1]:
-        if st.button("Semaine derniere", use_container_width=True):
-            start, finish = week_bounds_for(-1)
-            st.session_state.start_text = format_fr_datetime(start)
-            st.session_state.finish_text = format_fr_datetime(finish)
-            st.rerun()
-    with preset_cols[2]:
-        if st.button("Cette semaine", use_container_width=True):
-            start, finish = week_bounds_for(0)
-            st.session_state.start_text = format_fr_datetime(start)
-            st.session_state.finish_text = format_fr_datetime(finish)
-            st.rerun()
-    with preset_cols[3]:
-        if st.button("Semaine prochaine", use_container_width=True):
-            start, finish = week_bounds_for(1)
-            st.session_state.start_text = format_fr_datetime(start)
-            st.session_state.finish_text = format_fr_datetime(finish)
-            st.rerun()
+        preset_cols = st.columns([0.25, 0.25, 0.25, 0.25])
+        with preset_cols[0]:
+            st.caption("Raccourcis")
+        with preset_cols[1]:
+            if st.button("Semaine derniere", use_container_width=True):
+                start, finish = week_bounds_for(-1)
+                st.session_state.start_text = format_fr_datetime(start)
+                st.session_state.finish_text = format_fr_datetime(finish)
+                st.rerun()
+        with preset_cols[2]:
+            if st.button("Cette semaine", use_container_width=True):
+                start, finish = week_bounds_for(0)
+                st.session_state.start_text = format_fr_datetime(start)
+                st.session_state.finish_text = format_fr_datetime(finish)
+                st.rerun()
+        with preset_cols[3]:
+            if st.button("Semaine prochaine", use_container_width=True):
+                start, finish = week_bounds_for(1)
+                st.session_state.start_text = format_fr_datetime(start)
+                st.session_state.finish_text = format_fr_datetime(finish)
+                st.rerun()
 
-    st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
-    st.text_input("Dossier de Sortie", key="output_folder")
-    st.markdown("</div>", unsafe_allow_html=True)
+        st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
+        st.text_input("Dossier de Sortie", key="output_folder")
 
 
 def run_update(
@@ -756,7 +951,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 apply_theme()
-render_header()
+run = render_header()
 
 if "last_run" not in st.session_state:
     st.session_state.last_run = None
@@ -772,45 +967,39 @@ if "finish_text" not in st.session_state:
 if "output_folder" not in st.session_state:
     st.session_state.output_folder = "Session Streamlit - fichiers telechargeables apres traitement"
 
-action_spacer, action_col = st.columns([0.78, 0.22], gap="large")
-with action_col:
-    run = st.button("Run Update", type="primary", use_container_width=True, key="run_update_top")
-
 left, right = st.columns([0.42, 0.58], gap="large")
 
 with left:
-    st.markdown(
-        """
-        <div class="section-card">
-          <p class="section-title">Source Workbooks</p>
-          <p class="section-copy">
-            Associez le fichier maitre export Primavera P6 avec les rapports chantiers de mise a jour sous-traitants.
-          </p>
-          <div class="divider"></div>
-        """,
-        unsafe_allow_html=True,
-    )
+    with st.container(border=True):
+        st.markdown(
+            """
+            <p class="section-title">Source Workbooks</p>
+            <p class="section-copy">
+              Associez le fichier maitre export Primavera P6 avec les rapports chantiers de mise a jour sous-traitants.
+            </p>
+            <div class="divider"></div>
+            """,
+            unsafe_allow_html=True,
+        )
 
-    p6_file = render_file_field(
-        "Primavera Master Workbook *",
-        "P6 ENGINE",
-        "Modele d'activite et planification de reference exporte de Primavera.",
-        "p6_file",
-    )
-    source_a_file = render_file_field(
-        "SPIE Contractor Workbook (Optionnel)",
-        "SPIE ENGINE",
-        "Suivi d'avancement du sous-traitant electricite / tuyauterie.",
-        "source_a_file",
-    )
-    source_b_file = render_file_field(
-        "GCC Contractor Workbook (Optionnel)",
-        "GCC ENGINE",
-        "Avancement de genie civil et gros oeuvre du chantier GCC.",
-        "source_b_file",
-    )
-
-    st.markdown("</div>", unsafe_allow_html=True)
+        p6_file = render_file_field(
+            "Primavera Master Workbook *",
+            "P6 ENGINE",
+            "Modele d'activite et planification de reference exporte de Primavera.",
+            "p6_file",
+        )
+        source_a_file = render_file_field(
+            "SPIE Contractor Workbook (Optionnel)",
+            "SPIE ENGINE",
+            "Suivi d'avancement du sous-traitant electricite / tuyauterie.",
+            "source_a_file",
+        )
+        source_b_file = render_file_field(
+            "GCC Contractor Workbook (Optionnel)",
+            "GCC ENGINE",
+            "Avancement de genie civil et gros oeuvre du chantier GCC.",
+            "source_b_file",
+        )
 
 with right:
     last_run = st.session_state.last_run
@@ -875,14 +1064,6 @@ with right:
             unsafe_allow_html=True,
         )
 
-        d1, d2, d3 = st.columns(3)
-        with d1:
-            download_button("Telecharger REVIEW", last_run["review_out"])
-        with d2:
-            download_button("Telecharger P6 IMPORT", last_run["import_out"])
-        with d3:
-            download_button("Telecharger LOG", last_run["log_out"])
-
         tab_conflicts, tab_files, tab_logs = st.tabs(["Conflits", "Fichiers generes", "Logs"])
         with tab_conflicts:
             if summary.get("conflicts_detail"):
@@ -895,13 +1076,30 @@ with right:
                 st.dataframe(summary["missing_ids_detail"], use_container_width=True)
 
         with tab_files:
-            for label, path in (
-                ("REVIEW", last_run["review_out"]),
-                ("P6 IMPORT", last_run["import_out"]),
-                ("LOG", last_run["log_out"]),
-            ):
-                st.markdown(f"**{label}**")
-                st.markdown(f'<div class="output-path">{path.name}</div>', unsafe_allow_html=True)
+            file_cols = st.columns(3)
+            for col, (label, path, file_type) in zip(file_cols, (
+                ("REVIEW", last_run["review_out"], "review"),
+                ("P6 IMPORT", last_run["import_out"], "import"),
+                ("LOG", last_run["log_out"], "log"),
+            )):
+                with col:
+                    size_kb = max(1, int(path.stat().st_size / 1024)) if path.exists() else 0
+                    st.markdown(
+                        f"""
+                        <div class="file-card">
+                          <div class="file-card-top">
+                            <span class="file-card-icon">description</span>
+                            <span class="file-card-tag">{file_type}</span>
+                          </div>
+                          <div>
+                            <div class="file-card-name">{path.name}</div>
+                            <div class="file-card-meta">{size_kb} KB</div>
+                          </div>
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
+                    download_button(f"Telecharger {label}", path)
 
         with tab_logs:
             log_rows = summary.get("log_rows", [])
